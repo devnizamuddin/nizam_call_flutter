@@ -47,5 +47,9 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>This app uses the microphone to record your voice so you can do your call.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This app uses the camera to for video calling.</string>
 </dict>
 </plist>
