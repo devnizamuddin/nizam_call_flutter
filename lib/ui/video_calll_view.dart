@@ -74,25 +74,20 @@ class _VideoCallViewState extends State<VideoCallView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Get started with Video Calling'),
-        ),
-        body: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        body: SafeArea(
+      child: Stack(alignment: AlignmentDirectional.topEnd, children: [
+        Column(
           children: [
             // Container for the local video
-            Container(
-              height: 240,
-              decoration: BoxDecoration(border: Border.all()),
-              child: Center(child: _localPreview()),
+            Expanded(
+              child: Container(
+                height: 240,
+                decoration:
+                    BoxDecoration(border: Border.all(color: Colors.grey)),
+                child: Center(child: _localPreview()),
+              ),
             ),
             const SizedBox(height: 10),
-            //Container for the Remote video
-            Container(
-              height: 240,
-              decoration: BoxDecoration(border: Border.all()),
-              child: Center(child: _remoteVideo()),
-            ),
             // Button Row
             Row(
               children: <Widget>[
@@ -113,7 +108,22 @@ class _VideoCallViewState extends State<VideoCallView> {
             ),
             // Button Row ends
           ],
-        ));
+        ),
+        //Container for the Remote video
+        Positioned(
+          right: 24,
+          top: 24,
+          child: Container(
+            height: 128,
+            width: 128,
+            decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey),
+                borderRadius: const BorderRadius.all(Radius.circular(10))),
+            child: Center(child: _remoteVideo()),
+          ),
+        ),
+      ]),
+    ));
   }
 
   // Display local video preview
