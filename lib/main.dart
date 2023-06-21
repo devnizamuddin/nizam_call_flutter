@@ -32,8 +32,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String channelName = "<--Insert channel name here-->";
-  String token = "<--Insert authentication token here-->";
+  String channelName = "flutter_app";
+  String token =
+      "007eJxTYPh42Ld0aV69+4Pvq24+mFJcULOrJ6m+Ibxk+2fpiytclrgpMBiZmRlapBmaG6UlJ5oYGBskmZummiaZJiUZJhlYGCVbvlg7KaUhkJFBVuA9AyMUgvjcDGk5pSUlqUXxiQUFDAwAN4klHw==";
 
   int uid = 0; // uid of the local user
 
