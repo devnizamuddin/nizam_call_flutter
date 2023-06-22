@@ -26,26 +26,30 @@ class VideoCallView extends GetView<VideoCallController> {
             // Button Row
             Obx(
               () => Container(
-                padding: const EdgeInsets.all(20),
+                padding: const EdgeInsets.all(40),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Visibility(
                       visible: controller.isJoined.value,
-                      child: RawMaterialButton(
-                        onPressed: controller.leave,
-                        elevation: 2.0,
-                        fillColor: Colors.red,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: InkWell(
+                        onTap: controller.leave,
+                        child: Container(
+                          decoration: const BoxDecoration(
+                              color: Colors.red,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(40))),
+                          width: 150,
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 12, horizontal: 20),
                           child: Row(
-                            children: [
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: const [
                               Icon(
                                 Icons.call,
                                 size: 24,
                                 color: Colors.white,
                               ),
-                              SizedBox(width: 20),
                               Text(
                                 'End call',
                                 style: TextStyle(
@@ -56,28 +60,28 @@ class VideoCallView extends GetView<VideoCallController> {
                             ],
                           ),
                         ),
-                        padding: const EdgeInsets.all(15.0),
-                        shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(40))),
                       ),
                     ),
                     Visibility(
                       visible: !controller.isJoined.value,
-                      child: RawMaterialButton(
-                        onPressed: controller.join,
-                        elevation: 2.0,
-                        fillColor: Colors.green,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 4),
+                      child: InkWell(
+                        onTap: controller.join,
+                        child: Container(
+                          decoration: const BoxDecoration(
+                              color: Colors.green,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(40))),
+                          width: 150,
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 12, horizontal: 20),
                           child: Row(
-                            children: [
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: const [
                               Icon(
                                 Icons.call,
                                 size: 24,
                                 color: Colors.white,
                               ),
-                              SizedBox(width: 20),
                               Text(
                                 'Start call',
                                 style: TextStyle(
@@ -88,10 +92,6 @@ class VideoCallView extends GetView<VideoCallController> {
                             ],
                           ),
                         ),
-                        padding: const EdgeInsets.all(15.0),
-                        shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(40))),
                       ),
                     ),
                   ],
