@@ -36,12 +36,30 @@ class VideoCallView extends GetView<VideoCallController> {
                         onPressed: controller.leave,
                         elevation: 2.0,
                         fillColor: Colors.red,
-                        child: Icon(
-                          Icons.call,
-                          size: 35.0,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.call,
+                                size: 24,
+                                color: Colors.white,
+                              ),
+                              SizedBox(width: 20),
+                              Text(
+                                'End call',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    letterSpacing: 1),
+                              )
+                            ],
+                          ),
                         ),
                         padding: const EdgeInsets.all(15.0),
-                        shape: const CircleBorder(),
+                        shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(40))),
                       ),
                     ),
                     Visibility(
@@ -50,12 +68,30 @@ class VideoCallView extends GetView<VideoCallController> {
                         onPressed: controller.join,
                         elevation: 2.0,
                         fillColor: Colors.green,
-                        child: Icon(
-                          Icons.call,
-                          size: 35.0,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 4),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.call,
+                                size: 24,
+                                color: Colors.white,
+                              ),
+                              SizedBox(width: 20),
+                              Text(
+                                'Start call',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    letterSpacing: 1),
+                              )
+                            ],
+                          ),
                         ),
                         padding: const EdgeInsets.all(15.0),
-                        shape: const CircleBorder(),
+                        shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(40))),
                       ),
                     ),
                   ],
@@ -93,10 +129,7 @@ class VideoCallView extends GetView<VideoCallController> {
         ),
       );
     } else {
-      return const Text(
-        'Start',
-        textAlign: TextAlign.center,
-      );
+      return Container();
     }
   }
 
@@ -113,7 +146,7 @@ class VideoCallView extends GetView<VideoCallController> {
       );
     } else {
       String msg = '';
-      if (controller.isJoined.value) msg = 'Waiting';
+      if (controller.isJoined.value) msg = 'Waiting for other user to join';
       return Text(
         msg,
         textAlign: TextAlign.center,
