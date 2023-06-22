@@ -21,7 +21,7 @@ class VideoCallView extends GetView<VideoCallController> {
                 decoration:
                     BoxDecoration(border: Border.all(color: Colors.grey)),
                 child: Obx(
-                  () => Center(child: _localPreview()),
+                  () => Center(child: _remoteVideo()),
                 )),
             // Button Row
             Obx(
@@ -30,32 +30,33 @@ class VideoCallView extends GetView<VideoCallController> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    RawMaterialButton(
-                      onPressed: controller.isJoined.value
-                          ? () => {controller.leave()}
-                          : null,
-                      elevation: 2.0,
-                      fillColor: Colors.red,
-                      child: Icon(
-                        Icons.call_end,
-                        size: 35.0,
+                    Visibility(
+                      visible: controller.isJoined.value,
+                      child: RawMaterialButton(
+                        onPressed: controller.leave,
+                        elevation: 2.0,
+                        fillColor: Colors.red,
+                        child: Icon(
+                          Icons.call,
+                          size: 35.0,
+                        ),
+                        padding: const EdgeInsets.all(15.0),
+                        shape: const CircleBorder(),
                       ),
-                      padding: const EdgeInsets.all(15.0),
-                      shape: const CircleBorder(),
                     ),
-                    const SizedBox(width: 40),
-                    RawMaterialButton(
-                      onPressed: controller.isJoined.value
-                          ? null
-                          : () => {controller.join()},
-                      elevation: 2.0,
-                      fillColor: Colors.green,
-                      child: Icon(
-                        Icons.call,
-                        size: 35.0,
+                    Visibility(
+                      visible: !controller.isJoined.value,
+                      child: RawMaterialButton(
+                        onPressed: controller.join,
+                        elevation: 2.0,
+                        fillColor: Colors.green,
+                        child: Icon(
+                          Icons.call,
+                          size: 35.0,
+                        ),
+                        padding: const EdgeInsets.all(15.0),
+                        shape: const CircleBorder(),
                       ),
-                      padding: const EdgeInsets.all(15.0),
-                      shape: const CircleBorder(),
                     ),
                   ],
                 ),
@@ -75,7 +76,7 @@ class VideoCallView extends GetView<VideoCallController> {
                   border: Border.all(color: Colors.grey),
                   borderRadius: const BorderRadius.all(Radius.circular(10))),
               child: Obx(
-                () => Center(child: _remoteVideo()),
+                () => Center(child: _localPreview()),
               )),
         ),
       ]),
