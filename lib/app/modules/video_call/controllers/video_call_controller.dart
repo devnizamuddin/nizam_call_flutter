@@ -56,11 +56,10 @@ class VideoCallController extends GetxController {
 
   void join() async {
     await agoraEngine.startPreview();
-
-    // Set channel options including the client role and channel profile
     ChannelMediaOptions options = const ChannelMediaOptions(
       clientRoleType: ClientRoleType.clientRoleBroadcaster,
       channelProfile: ChannelProfileType.channelProfileCommunication,
+      //publishCameraTrack: false,
     );
 
     await agoraEngine.joinChannel(

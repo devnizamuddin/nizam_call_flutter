@@ -13,41 +13,52 @@ class VideoCallView extends GetView<VideoCallController> {
     return Scaffold(
         body: SafeArea(
       child: Stack(alignment: AlignmentDirectional.topEnd, children: [
-        Column(
+        Stack(
+          alignment: AlignmentDirectional.bottomCenter,
           children: [
             // Container for the local video
-            Expanded(
-              child: Container(
-                  height: 240,
-                  decoration:
-                      BoxDecoration(border: Border.all(color: Colors.grey)),
-                  child: Obx(
-                    () => Center(child: _localPreview()),
-                  )),
-            ),
-            const SizedBox(height: 10),
+            Container(
+                decoration:
+                    BoxDecoration(border: Border.all(color: Colors.grey)),
+                child: Obx(
+                  () => Center(child: _localPreview()),
+                )),
             // Button Row
             Obx(
-              () => Row(
-                children: <Widget>[
-                  Expanded(
-                    child: ElevatedButton(
-                      onPressed: controller.isJoined.value
-                          ? null
-                          : () => {controller.join()},
-                      child: const Text('Join'),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: ElevatedButton(
+              () => Container(
+                padding: const EdgeInsets.all(20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    RawMaterialButton(
                       onPressed: controller.isJoined.value
                           ? () => {controller.leave()}
                           : null,
-                      child: const Text('Leave'),
+                      elevation: 2.0,
+                      fillColor: Colors.red,
+                      child: Icon(
+                        Icons.call_end,
+                        size: 35.0,
+                      ),
+                      padding: const EdgeInsets.all(15.0),
+                      shape: const CircleBorder(),
                     ),
-                  ),
-                ],
+                    const SizedBox(width: 40),
+                    RawMaterialButton(
+                      onPressed: controller.isJoined.value
+                          ? null
+                          : () => {controller.join()},
+                      elevation: 2.0,
+                      fillColor: Colors.green,
+                      child: Icon(
+                        Icons.call,
+                        size: 35.0,
+                      ),
+                      padding: const EdgeInsets.all(15.0),
+                      shape: const CircleBorder(),
+                    ),
+                  ],
+                ),
               ),
             )
             // Button Row ends
@@ -82,7 +93,7 @@ class VideoCallView extends GetView<VideoCallController> {
       );
     } else {
       return const Text(
-        'Join a channel',
+        'Start',
         textAlign: TextAlign.center,
       );
     }
@@ -101,7 +112,7 @@ class VideoCallView extends GetView<VideoCallController> {
       );
     } else {
       String msg = '';
-      if (controller.isJoined.value) msg = 'Waiting for a remote user to join';
+      if (controller.isJoined.value) msg = 'Waiting';
       return Text(
         msg,
         textAlign: TextAlign.center,
